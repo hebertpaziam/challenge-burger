@@ -1,5 +1,9 @@
+import './navbar.scss';
+
 import React from 'react';
 
-export const Navbar = () => {
-  return <nav></nav>;
+export type NavbarProps = Readonly<{}>;
+
+export const Navbar = ({}: NavbarProps) => {
+  return <nav className="navbar"></nav>;
 };
