@@ -1,0 +1,12 @@
+@import 'toolbox';
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__image {
+    width: auto;
+    height: 150px;
+  }
+}

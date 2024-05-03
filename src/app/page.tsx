@@ -1,9 +1,15 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
-interface Props {
+import { Banner } from '@/components/banner';
+
+export type MenuProps = {
   children?: ReactNode;
-  // any props that come into the component
-}
-export default function App({ children }: Props) {
-  return <>{children}</>;
+};
+export default function Menu({ children }: MenuProps) {
+  return (
+    <>
+      <Banner />
+      {children}
+    </>
+  );
 }
