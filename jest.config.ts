@@ -20,7 +20,7 @@ const config: Config = {
     '!<rootDir>/coverage/**',
   ],
   moduleNameMapper: {
-    '^@app/(.*)$': '<rootDir>/app/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   }
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
