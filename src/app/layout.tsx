@@ -1,11 +1,12 @@
 import '../styles/styles.scss';
 
 import { Roboto } from 'next/font/google';
+import React from 'react';
 
 import { Navbar } from '@/components/navbar';
 
 import type { Metadata } from 'next';
-const roboto = Roboto({ weight: ['400'], subsets: ['latin'] });
+const roboto = Roboto({ weight: ['400', '500'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',

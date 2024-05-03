@@ -5,4 +5,12 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  color: inherit;
+}
+:root {
+  --banner-image: 'https://preodemo.gumlet.io/usr/venue/7602/web/646fbf3abf9d0.png';
+  --background-colour: #ffffff;
+  --primary-colour: #4f372f;
+  --primary-colour-hover: #4f372f;
+  --nav-background-colour: #4f372f;
 }

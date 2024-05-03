@@ -1,5 +1,84 @@
 @import 'toolbox';
 
 .navbar {
-  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $background-colour;
+  background-color: $nav-background-colour;
+  height: 64px;
+  padding: 0 1rem;
+  transition: $default-transition;
+
+  &__list {
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+  }
+
+  &__item {
+    @extend %h1-new;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 232px;
+    height: 100%;
+    padding: 0.875rem;
+    text-align: center;
+
+    &--active {
+      display: flex;
+    }
+  }
+
+  &__trigger {
+    display: block;
+    width: 1.75rem;
+    height: 1.75rem;
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  &--opened {
+    height: 200px;
+
+    .navbar__item {
+      display: flex;
+      height: 52px;
+      border-bottom: 5px solid transparent;
+
+      &--active {
+        border-color: $background-colour;
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    height: 52px;
+
+    &__list {
+      flex-direction: row;
+    }
+
+    &__item {
+      display: flex;
+      border-bottom: 5px solid transparent;
+      transition: $default-transition;
+
+      &--active {
+        border-color: $background-colour;
+      }
+    }
+
+    &__trigger {
+      display: none;
+    }
+  }
 }
