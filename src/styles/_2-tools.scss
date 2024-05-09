@@ -1,0 +1,13 @@
+@mixin respond-to($device) {
+    @if $device == 'desktop' {
+      @media (min-width: 1024px) {
+        @content;
+      }
+    }
+    
+    @if $device == 'mobile' {
+      @media (max-width: 1023px) {
+        @content;
+      }
+    }
+  }

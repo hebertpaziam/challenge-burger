@@ -1,0 +1,64 @@
+@import 'toolbox';
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__image {
+    width: auto;
+    height: 150px;
+  }
+
+  &__section-list {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__section-item {
+    padding: 0 12px;
+    border-bottom: 2px solid transparent;
+    transition: $default-transition;
+  }
+
+  &__section-item-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  &__section-image {
+    width: 82px;
+    height: 82px;
+    padding: 2px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    object-fit: cover;
+    transition: $default-transition;
+  }
+
+  &__section-title {
+    font-size: 1rem;
+    line-height: 1.1719rem;
+    letter-spacing: 0.5px;
+    transition: $default-transition;
+    padding-bottom: 1rem;
+  }
+
+  &__section-item--active {
+    border-color: $system-primary-color;
+
+    .menu__section-title {
+      font-weight: 600;
+    }
+    .menu__section-image {
+      border-color: $system-primary-color;
+    }
+  }
+
+  @include respond-to('desktop') {
+    justify-content: flex-start;
+  }
+}

@@ -1,10 +1,37 @@
+@import 'toolbox';
+
 .home {
   width: 100%;
+  padding: 0 0.75rem;
+  background-color: $color-white;
 
   &__banner {
+    margin-bottom: 16px;
   }
 
   &__search {
     width: 100%;
+    margin-bottom: 16px;
+  }
+
+  &__menu {
+    padding: 40px 32px;
+    background-color: $color-white;
+  }
+
+  @include respond-to('desktop') {
+    background-color: transparent;
+
+    &__banner {
+      margin-bottom: 12px;
+    }
+
+    &__search {
+      margin-bottom: 12px;
+    }
+
+    &__menu {
+      background-color: $color-gray-100;
+    }
   }
 }

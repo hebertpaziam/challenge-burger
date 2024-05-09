@@ -5,6 +5,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 
 import { Banner } from '@/components/banner';
 import Field from '@/components/field/field';
+import Menu from '@/components/menu/menu';
 
 export type HomeProps = Readonly<{
   children?: ReactNode;
@@ -30,11 +31,11 @@ export default ({ children }: HomeProps) => {
   }, [searchTerm]);
 
   return (
-    <div className='home'>
+    <div className="home">
       <div className="home__banner">
         <Banner />
       </div>
-      <div className="page-content">
+      <div className="home__content page-content">
         <Field
           type="text"
           prefixIcon="search"
@@ -43,6 +44,10 @@ export default ({ children }: HomeProps) => {
           value={searchTerm}
           onChange={handlerChange}
         />
+
+        <div className="home__menu">
+          <Menu />
+        </div>
       </div>
     </div>
   );
