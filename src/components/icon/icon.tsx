@@ -7,7 +7,7 @@ export type IconProps = Readonly<{
   size?: number;
 }>;
 
-export const Icon = ({ size = 24, name }: IconProps) => {
+export default ({ size = 24, name }: IconProps) => {
   const [href, setHref] = React.useState('');
 
   useEffect(() => {

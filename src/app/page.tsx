@@ -2,14 +2,14 @@ import React, { ReactNode } from 'react';
 
 import { Banner } from '@/components/banner';
 
-export type MenuProps = {
+export type HomeProps = Readonly<{
   children?: ReactNode;
-};
-export default function Menu({ children }: MenuProps) {
+}>;
+export default ({ children }: HomeProps) => {
   return (
     <>
       <Banner />
       {children}
     </>
   );
-}
+};

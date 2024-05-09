@@ -10,7 +10,7 @@ import { Icon } from '@/components/icon';
 
 export type NavbarProps = Readonly<{}>;
 
-export const Navbar = ({}: NavbarProps) => {
+export default ({}: NavbarProps) => {
   const pathname = usePathname();
   const [isOpened, setIsOpened] = useState(false);
 

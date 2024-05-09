@@ -2,21 +2,18 @@
 
 import './banner.scss';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+
+import { ConfigContext } from '@/contexts/config';
+import { IConfig } from '@/interfaces/config';
 
 export type BannerProps = Readonly<{}>;
 
-export const Banner = ({}: BannerProps) => {
-  const [bannerImage, setBannerImage] = useState('');
-
-  useEffect(() => {
-    const image = getComputedStyle(document.documentElement)?.getPropertyValue('--banner-image');
-    setBannerImage(JSON.parse(image));
-  }, []);
-
+export default ({}: BannerProps) => {
+  const config = useContext<IConfig | null>(ConfigContext);
   return (
     <div className="banner">
-      <img className="banner__image" src={bannerImage} alt="Banner image" />;
+      <img className="banner__image" src={config?.webSettings?.bannerImage} alt="Banner image" />;
     </div>
   );
 };
