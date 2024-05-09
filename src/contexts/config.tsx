@@ -9,7 +9,7 @@ export type ConfigContextProps = Readonly<{
   initialConfig: IConfig;
 }>;
 
-export const ConfigContext = createContext<IConfig | null>(null);
+export const ConfigContext = createContext<IConfig>({} as IConfig);
 
 export const ConfigProvider = ({ children, initialConfig }: ConfigContextProps) => {
   const [config] = useState<IConfig>(initialConfig);

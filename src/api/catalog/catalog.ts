@@ -1,10 +1,12 @@
+import { ICatalog } from '@/interfaces/catalog';
+
 const MENU_URL = `/api/menu`;
 
-export const RequestCatalog = async () => {
+export const RequestCatalog = async (): Promise<ICatalog> => {
   try {
     const response = await fetch(MENU_URL);
-    const result = await response.json();
-
-    return result;
-  } catch (error) {}
+    return await response.json();
+  } catch (error) {
+    throw new Error('Failed to fetch data');
+  }
 };

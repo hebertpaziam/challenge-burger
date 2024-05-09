@@ -1,0 +1,44 @@
+@import 'toolbox';
+
+.accordion {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    padding: 12px;
+    background: none;
+    border: none;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.7581rem;
+    letter-spacing: 0.5px;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+    transition: $default-transition;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    transition: $default-transition;
+  }
+
+  &--open {
+    .accordion__icon {
+      transform: rotate(180deg);
+    }
+    .accordion__content {
+      max-height: 400px;
+    }
+  }
+}
