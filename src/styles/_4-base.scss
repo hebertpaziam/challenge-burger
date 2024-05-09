@@ -142,4 +142,13 @@ body {
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: $color-gray-100;
+}
+
+svg {
+  font-size: 1rem;
+}
+
+input {
+  outline: none;
 }

@@ -4,8 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $background-colour;
-  background-color: $nav-background-colour;
+  color: $system-background-colour;
+  background-color: $system-nav-background-colour;
   height: 64px;
   padding: 0 1rem;
   transition: $default-transition;
@@ -55,7 +55,7 @@
       border-bottom: 5px solid transparent;
 
       &--active {
-        border-color: $background-colour;
+        border-color: $system-background-colour;
       }
     }
   }
@@ -73,7 +73,7 @@
       transition: $default-transition;
 
       &--active {
-        border-color: $background-colour;
+        border-color: $system-background-colour;
       }
     }
 

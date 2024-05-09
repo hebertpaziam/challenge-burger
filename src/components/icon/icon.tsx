@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { HTMLAttributes, useEffect } from 'react';
 
 export type IconProps = Readonly<{
   name: string;
-  size?: number;
 }>;
 
-export default ({ size = 24, name }: IconProps) => {
+export default ({ name, className }: IconProps & HTMLAttributes<HTMLDivElement>) => {
   const [href, setHref] = React.useState('');
 
   useEffect(() => {
@@ -16,14 +15,14 @@ export default ({ size = 24, name }: IconProps) => {
 
   return (
     <svg
-      width={size}
-      height={size}
+      width='1em'
+      height='1em'
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={'icon-' + name}
+      className={className || 'icon-' + name}
     >
       <use href={href} />
     </svg>

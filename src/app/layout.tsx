@@ -7,7 +7,6 @@ import { RequestConfig } from '@/api/config';
 import { Navbar } from '@/components/navbar';
 import { CatalogProvider } from '@/contexts/catalog';
 import { ConfigProvider } from '@/contexts/config';
-import { IConfig } from '@/interfaces/config';
 
 import type { Metadata } from 'next';
 export const metadata: Metadata = {
@@ -18,19 +17,19 @@ export const metadata: Metadata = {
 const roboto = Roboto({ weight: ['400', '500'], subsets: ['latin'] });
 
 export default async ({ children }: Readonly<{ children: React.ReactNode }>) => {
-  const data: IConfig = await RequestConfig();
+  const data = await RequestConfig();
 
   const style: any = {
-    '--background-colour': data?.webSettings?.backgroundColour,
-    '--banner-image': data?.webSettings?.bannerImage,
-    '--nav-background-colour': data?.webSettings?.navBackgroundColour,
-    '--primary-colour': data?.webSettings?.primaryColour,
-    '--primary-colour-hover': data?.webSettings?.primaryColourHover,
+    '--system-background-color': data.webSettings.backgroundColour,
+    '--system-banner-image': data.webSettings.bannerImage,
+    '--system-nav-background-color': data.webSettings.navBackgroundColour,
+    '--system-primary-color': data.webSettings.primaryColour,
+    '--system-primary-color-hover': data.webSettings.primaryColourHover,
   };
 
   return (
     <html lang="en" style={style}>
-      <body className={roboto.className}>
+      <body className={roboto.className} suppressHydrationWarning={true}>
         <ConfigProvider initialConfig={data}>
           <CatalogProvider>
             <header>

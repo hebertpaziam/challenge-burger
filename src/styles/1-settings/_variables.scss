@@ -1,7 +1,11 @@
-$banner-image: var(--banner-image);
-$background-colour: var(--background-colour);
-$primary-colour: var(--primary-colour);
-$primary-colour-hover: var(--primary-colour-hover);
-$nav-background-colour: var(--nav-background-colour);
+$system-banner-image: var(--system-banner-image, 'https://preodemo.gumlet.io/usr/venue/7602/web/646fbf3abf9d0.png');
+$system-background-colour: var(--system-background-color, #ffffff);
+$system-primary-color: var(--system-primary-color, #4f372f);
+$system-primary-color-hover: var(--system-primary-color-hover, #4f372f);
+$system-nav-background-colour: var(--system-nav-background-color, #4f372f);
 
 $default-transition: all 100ms ease-in-out;
+
+$color-gray-100: #eeeeee;
+$color-gray-200: #dadada;
+$color-gray-300: #8a94a4;
