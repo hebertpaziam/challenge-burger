@@ -18,7 +18,7 @@ export type HomeProps = Readonly<{
 export default ({ children }: HomeProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-  const [isBasketOpened, setIsBasketOpened] = useState(true);
+  const [isBasketOpened, setIsBasketOpened] = useState(false);
   const [filteredCatalog, setFilteredCatalog] = useState({} as ICatalog);
   const { catalog, fetchCatalog } = useContext(CatalogContext);
 

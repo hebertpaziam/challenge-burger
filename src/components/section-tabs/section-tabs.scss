@@ -2,6 +2,8 @@
 
 .section-tabs {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
   width: 100%;
   overflow-x: auto;
@@ -47,5 +49,9 @@
     .section-tabs__image {
       border-color: $system-primary-color;
     }
+  }
+
+  @include respond-to('desktop') {
+    justify-content: flex-start;
   }
 }
