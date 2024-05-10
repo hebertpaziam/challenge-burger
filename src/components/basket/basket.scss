@@ -6,10 +6,15 @@
   left: 0;
   bottom: 0;
   right: 0;
-  display: none;
+  display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: $system-background-color;
+
+  &__header,
+  &__content,
+  &__footer {
+    background-color: $system-background-color;
+  }
 
   &__header {
     display: flex;
@@ -43,6 +48,13 @@
 
   &__close-icon {
     font-size: 1.75rem;
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    overflow: auto;
   }
 
   &__list {
@@ -107,7 +119,7 @@
     width: 100%;
     padding: 1rem 0;
 
-    strong{
+    strong {
       font-weight: 700;
     }
   }
@@ -123,18 +135,52 @@
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 1.7581rem;
-    
-    strong{
+
+    strong {
       font-weight: 700;
     }
   }
 
-  &--open {
-    display: flex;
+  &__mobile-actions {
+    position: relative;
+    display: none;
+    width: 100%;
+    justify-content: center;
+    padding: 8px 24px 24px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      backdrop-filter: blur(10px);
+      z-index: -1;
+    }
+
+    .action-button {
+      width: 100%;
+      max-width: 345px;
+    }
+  }
+
+  @include respond-to('mobile') {
+    &--hidden {
+      top: unset;
+      .basket__header,
+      .basket__content,
+      .basket__footer {
+        display: none;
+      }
+
+      .basket__mobile-actions:not(.basket__mobile-actions--hidden) {
+        display: flex;
+      }
+    }
   }
 
   @include respond-to('desktop') {
-    display: flex;
     position: relative;
     background-color: $color-gray-100;
     box-shadow: 0px 2px 14px 0px #00000026;

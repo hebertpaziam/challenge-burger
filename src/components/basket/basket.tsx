@@ -13,13 +13,9 @@ import { ICatalogItemModifier } from '@/interfaces/catalog-item-modifier';
 import ActionButton from '../action-button/action-button';
 import Counter from '../counter/counter';
 
-export type BasketProps = Readonly<{
-  isOpened: boolean;
-  onClose: (event?: any) => void;
-}>;
-
-export default function Basket({ isOpened, onClose, className }: BasketProps & HTMLAttributes<HTMLDivElement>) {
+export default function Basket({ className }: HTMLAttributes<HTMLDivElement>) {
   const [total, setTotal] = useState(0);
+  const [isBasketOpened, setIsBasketOpened] = useState(false);
   const { locale, ccy } = useContext(ConfigContext);
   const { basketItems, updateBasketQuantityItem } = useContext(BasketContext);
 
@@ -35,7 +31,7 @@ export default function Basket({ isOpened, onClose, className }: BasketProps & H
   };
 
   useEffect(() => {
-    const handleKeyDown = (event: any) => event?.keyCode === 27 && onClose();
+    const handleKeyDown = (event: any) => event?.keyCode === 27 && setIsBasketOpened(false);
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
@@ -49,43 +45,44 @@ export default function Basket({ isOpened, onClose, className }: BasketProps & H
   }, [basketItems]);
 
   return (
-    <div className={`basket ${isOpened ? 'basket--open' : ''} ${className || ''}`}>
+    <div className={`basket ${!isBasketOpened ? 'basket--hidden' : ''} ${className || ''}`}>
       <div className="basket__header">
         <h2 className="basket__title">Basket</h2>
-        <button type="button" className="basket__close" onClick={onClose}>
+        <button type="button" className="basket__close" onClick={() => setIsBasketOpened(false)}>
           <Icon name="x" className="basket__close-icon" />
         </button>
       </div>
-      {basketItems?.length ? (
-        <ul className="basket__list">
-          {basketItems?.map((item) => (
-            <li key={item?.id} className="basket__item">
-              <p className="basket__item-title">
-                {item.name}{' '}
-                <strong>
-                  {new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(getItemSubTotal(item))}
-                </strong>
-              </p>
-              {item?.modifiers?.length && (
-                <p className="basket__item-subtitle">
-                  {`With ${item.modifiers![0].items[0].name} ` +
-                    `(+${new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(getModifiersAmount(item.modifiers!))})`}
-                  <span></span>
+      <div className="basket__content">
+        {basketItems?.length ? (
+          <ul className="basket__list">
+            {basketItems?.map((item) => (
+              <li key={item?.id} className="basket__item">
+                <p className="basket__item-title">
+                  {item.name}{' '}
+                  <strong>
+                    {new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(getItemSubTotal(item))}
+                  </strong>
                 </p>
-              )}
-              <Counter
-                className="basket__item-counter"
-                initialValue={item?.quantity}
-                minValue={0}
-                onChange={(value) => updateBasketQuantityItem(value as number, item)}
-              />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="basket__empty">Your basket is empty</p>
-      )}
-
+                {item?.modifiers?.length && (
+                  <p className="basket__item-subtitle">
+                    {`With ${item.modifiers![0].items[0].name} ` +
+                      `(+${new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(getModifiersAmount(item.modifiers!))})`}
+                    <span></span>
+                  </p>
+                )}
+                <Counter
+                  className="basket__item-counter"
+                  initialValue={item?.quantity}
+                  minValue={0}
+                  onChange={(value) => updateBasketQuantityItem(value as number, item)}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="basket__empty">Your basket is empty</p>
+        )}
+      </div>
       <div className="basket__footer">
         {!!basketItems.length && (
           <>
@@ -101,6 +98,11 @@ export default function Basket({ isOpened, onClose, className }: BasketProps & H
             <ActionButton className="basket__checkout">Checkout now</ActionButton>
           </>
         )}
+      </div>
+      <div className={`basket__mobile-actions ${!basketItems?.length ? 'basket__mobile-actions--hidden' : ''}`}>
+        <ActionButton className="basket__show" onClick={() => setIsBasketOpened(true)}>
+          Your basket • {basketItems.length} item(s)
+        </ActionButton>
       </div>
     </div>
   );

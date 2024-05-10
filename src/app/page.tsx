@@ -15,7 +15,6 @@ import { Equalize } from '@/utils';
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-  const [isBasketOpened, setIsBasketOpened] = useState(false);
   const [filteredCatalog, setFilteredCatalog] = useState({} as ICatalog);
   const { catalog, fetchCatalog } = useContext(CatalogContext);
 
@@ -81,7 +80,7 @@ export default function Home() {
 
         <div className="home__menu">
           <Menu className="home__menu-content" catalog={filteredCatalog} />
-          <Basket className="home__basket" isOpened={isBasketOpened} onClose={() => setIsBasketOpened(false)} />
+          <Basket className="home__basket" />
         </div>
       </div>
     </div>
