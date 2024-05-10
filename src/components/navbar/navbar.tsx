@@ -16,8 +16,8 @@ export default ({}: NavbarProps) => {
 
   const menuList = [
     { name: 'Menu', href: '/' },
-    { name: 'Entrar', href: '/sign-in' },
-    { name: 'Contato', href: '/contact' },
+    { name: 'Sign In', href: '/sign-in' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const closeMenu = () => {

@@ -2,7 +2,7 @@
 
 import './menu.scss';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { HTMLAttributes, useContext, useEffect, useState } from 'react';
 
 import { Accordion } from '@/components/accordion';
 import { ItemDetails } from '@/components/item-details';
@@ -12,9 +12,9 @@ import { CatalogContext } from '@/contexts/catalog';
 
 export type MenuProps = Readonly<{}>;
 
-export default ({}: MenuProps) => {
+export default ({ className }: MenuProps & HTMLAttributes<HTMLDivElement>) => {
   const { catalog, fetchCatalog } = useContext(CatalogContext);
-  const { basket, setBasket } = useContext(BasketContext);
+  const { basketItems, addBasketItem } = useContext(BasketContext);
 
   const [sectionActivated, setSectionActivated] = useState(0);
 
@@ -26,14 +26,9 @@ export default ({}: MenuProps) => {
     fetchCatalog();
   }, []);
 
-  useEffect(() => {
-    const item = catalog.sections?.[0].items[0];
-    setBasket({ ...basket, items: [catalog.sections?.[0].items[0]] });
-  }, [catalog]);
-
   return (
     catalog?.sections && (
-      <div className="menu">
+      <div className={`menu ${className || ''}`}>
         <SectionTabs sections={catalog.sections} sectionActivated={sectionActivated} onSectionChange={toggleTab} />
 
         <ol className="menu__content">
@@ -46,7 +41,7 @@ export default ({}: MenuProps) => {
                     <ItemDetails
                       key={sectionItem.id}
                       item={sectionItem}
-                      count={basket.items?.filter((basketItem) => basketItem?.id === sectionItem?.id).length || 0}
+                      count={basketItems?.find((basketItem) => basketItem?.id === sectionItem?.id)?.quantity || 0}
                     />
                   ))}
                 </Accordion>

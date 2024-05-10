@@ -17,6 +17,10 @@
   &__menu {
     padding: 40px 0 0 0;
     background-color: $color-white;
+
+    &-basket {
+      width: 100%;
+    }
   }
 
   @include respond-to('desktop') {
@@ -31,8 +35,17 @@
     }
 
     &__menu {
+      display: flex;
+      justify-content: space-between;
       padding: 40px 32px;
       background-color: $color-gray-100;
+
+      &-items {
+        flex: 1;
+      }
+    }
+    &__basket{
+      width: 320px;
     }
   }
 }

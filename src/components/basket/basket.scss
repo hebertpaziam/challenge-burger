@@ -1,0 +1,137 @@
+@import 'toolbox';
+
+.basket {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  background-color: $system-background-color;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
+    text-align: right;
+    border-bottom: 1px solid $color-gray-300;
+  }
+  &__title,
+  &__empty {
+    flex: 1;
+    margin-left: 28px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.3181rem;
+    letter-spacing: 0.0469rem;
+    text-align: center;
+  }
+
+  &__close {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: $system-primary-color;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  &__close-icon {
+    font-size: 1.75rem;
+  }
+
+  &__list {
+    width: 100%;
+  }
+  &__empty {
+    width: 100%;
+    font-weight: 400;
+    color: $color-gray-500;
+    padding: 1rem 0.5rem;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 1.1719rem;
+    color: $color-gray-700;
+    border: 1px solid $color-gray-200;
+
+    &-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      strong {
+        font-weight: 500;
+      }
+    }
+
+    &-subtitle {
+      color: $color-gray-500;
+    }
+    &-counter {
+      margin-top: 0.75rem;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 4rem;
+    padding: 1rem;
+    background-color: $color-gray-100;
+  }
+
+  &__checkout {
+    margin-top: auto;
+  }
+
+  &--open {
+    display: flex;
+  }
+
+  @include respond-to('desktop') {
+    display: flex;
+    position: relative;
+    height: auto;
+    background-color: $color-gray-100;
+    box-shadow: 0px 2px 14px 0px #00000026;
+
+    &__header {
+      padding: 1.375rem 1.5rem;
+      border-color: transparent;
+    }
+    &__close {
+      display: none;
+    }
+    &__title {
+      margin-left: 0;
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.7581rem;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+
+    &__empty {
+      text-align: left;
+    }
+
+    &__list {
+      background-color: $system-background-color;
+    }
+  }
+}

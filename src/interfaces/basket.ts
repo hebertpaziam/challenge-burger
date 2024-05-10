@@ -1,6 +1,5 @@
-import { ICatalogItem } from './catalog-item';
+import { IBasketItem } from './basket-item';
 
 export interface IBasket {
-    id: number;
-    items: ICatalogItem[];
+  items: IBasketItem[];
 }

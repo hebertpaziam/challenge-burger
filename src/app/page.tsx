@@ -4,8 +4,9 @@ import './page.scss';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 import { Banner } from '@/components/banner';
-import Field from '@/components/field/field';
-import Menu from '@/components/menu/menu';
+import { Basket } from '@/components/basket';
+import { Field } from '@/components/field';
+import { Menu } from '@/components/menu';
 
 export type HomeProps = Readonly<{
   children?: ReactNode;
@@ -13,6 +14,7 @@ export type HomeProps = Readonly<{
 export default ({ children }: HomeProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+  const [isBasketOpened, setIsBasketOpened] = useState(true);
 
   const handlerChange = (e: any) => {
     setSearchTerm(e.target.value);
@@ -46,7 +48,8 @@ export default ({ children }: HomeProps) => {
         />
 
         <div className="home__menu">
-          <Menu />
+          <Menu className="home__menu-content" />
+          <Basket className="home__basket" isOpened={isBasketOpened} onClose={() => setIsBasketOpened(false)} />
         </div>
       </div>
     </div>
