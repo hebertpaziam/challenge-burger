@@ -19,7 +19,12 @@ export type ItemModalProps = Readonly<{
   onClose: (event?: any) => void;
 }>;
 
-export default ({ className, item, isOpened, onClose }: ItemModalProps & HTMLAttributes<HTMLDivElement>) => {
+export default function ItemModal({
+  className,
+  item,
+  isOpened,
+  onClose,
+}: ItemModalProps & HTMLAttributes<HTMLDivElement>) {
   const { locale, ccy } = useContext(ConfigContext);
   const [totalAmount, setTotalAmount] = useState(item.price || 0);
   const [selectedModifiers, setSelectedModifiers] = useState<ICatalogItemModifierOption[]>([]);
@@ -30,7 +35,7 @@ export default ({ className, item, isOpened, onClose }: ItemModalProps & HTMLAtt
   const onAddToBasket = () => {
     addBasketItem({
       ...item,
-      modifiers: item.modifiers?.map((modifier) => ({...modifier,items: selectedModifiers})),
+      modifiers: item.modifiers?.map((modifier) => ({ ...modifier, items: selectedModifiers })),
       quantity: counterValue,
     });
     onClose();
@@ -51,7 +56,7 @@ export default ({ className, item, isOpened, onClose }: ItemModalProps & HTMLAtt
     } else {
       setTotalAmount(counterValue * amountModifiers);
     }
-  }, [counterValue, selectedModifiers]);
+  }, [counterValue, selectedModifiers, item.price, setTotalAmount]);
 
   return (
     <div className={`item-modal ${isOpened ? 'item-modal--open' : ''} ${className || ''}`}>
@@ -84,4 +89,4 @@ export default ({ className, item, isOpened, onClose }: ItemModalProps & HTMLAtt
       </div>
     </div>
   );
-};
+}

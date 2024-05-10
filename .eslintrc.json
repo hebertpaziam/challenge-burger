@@ -14,5 +14,7 @@
   },
   "rules": {
     // Add your custom ESLint rules here
+    "@typescript-eslint/no-explicit-any": "off",
+    "@next/next/no-img-element": "off"
   }
 }

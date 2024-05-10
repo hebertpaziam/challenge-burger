@@ -1,7 +1,7 @@
 'use client';
 import './page.scss';
 
-import React, { ReactNode, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useEffect, useState } from 'react';
 
 import { Banner } from '@/components/banner';
 import { Basket } from '@/components/basket';
@@ -12,21 +12,18 @@ import { ICatalog } from '@/interfaces/catalog';
 import { ICatalogSection } from '@/interfaces/catalog-section';
 import { Equalize } from '@/utils';
 
-export type HomeProps = Readonly<{
-  children?: ReactNode;
-}>;
-export default ({ children }: HomeProps) => {
+export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
   const [isBasketOpened, setIsBasketOpened] = useState(false);
   const [filteredCatalog, setFilteredCatalog] = useState({} as ICatalog);
   const { catalog, fetchCatalog } = useContext(CatalogContext);
 
-  const handlerChange = (e: any) => {
+  const handlerChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  const processSearch = () => {
+  const processSearch = useCallback(() => {
     let filtered: ICatalogSection[] = [...catalog.sections.map((section) => ({ ...section, items: [] }))];
 
     catalog.sections.forEach((section) => {
@@ -45,11 +42,11 @@ export default ({ children }: HomeProps) => {
     });
 
     setFilteredCatalog({ ...filteredCatalog, sections: [...filtered.filter((section) => !!section.items.length)] });
-  };
+  }, [catalog, searchTerm, filteredCatalog, setFilteredCatalog]);
 
   useEffect(() => {
     fetchCatalog();
-  }, []);
+  }, [fetchCatalog]);
 
   useEffect(() => {
     setFilteredCatalog({ ...catalog });
@@ -65,7 +62,7 @@ export default ({ children }: HomeProps) => {
       const newTimeoutId = setTimeout(() => processSearch(), 500);
       setTimeoutId(newTimeoutId);
     }
-  }, [searchTerm, catalog]);
+  }, [searchTerm, catalog, timeoutId, processSearch]);
 
   return (
     <div className="home">
@@ -89,4 +86,4 @@ export default ({ children }: HomeProps) => {
       </div>
     </div>
   );
-};
+}

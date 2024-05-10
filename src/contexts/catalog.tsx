@@ -11,7 +11,7 @@ export type CatalogProviderProps = Readonly<{
 
 export type CatalogContextProps = Readonly<{
   catalog: ICatalog;
-  setCatalog: Dispatch<React.SetStateAction<ICatalog>>;
+  setCatalog: Dispatch<SetStateAction<ICatalog>>;
   fetchCatalog: () => Promise<void>;
 }>;
 

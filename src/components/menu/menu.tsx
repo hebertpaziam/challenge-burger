@@ -12,8 +12,8 @@ import { ICatalog } from '@/interfaces/catalog';
 
 export type MenuProps = Readonly<{ catalog: ICatalog }>;
 
-export default ({ className, catalog }: MenuProps & HTMLAttributes<HTMLDivElement>) => {
-  const { basketItems, addBasketItem } = useContext(BasketContext);
+export default function Menu({ className, catalog }: MenuProps & HTMLAttributes<HTMLDivElement>) {
+  const { basketItems } = useContext(BasketContext);
 
   const [sectionActivated, setSectionActivated] = useState(0);
 
@@ -23,7 +23,7 @@ export default ({ className, catalog }: MenuProps & HTMLAttributes<HTMLDivElemen
 
   return (
     <div className={`menu ${className || ''}`}>
-      {!!catalog?.sections?.length ? (
+      {catalog?.sections?.length ? (
         <>
           <SectionTabs sections={catalog.sections} sectionActivated={sectionActivated} onSectionChange={toggleTab} />
 
@@ -50,4 +50,4 @@ export default ({ className, catalog }: MenuProps & HTMLAttributes<HTMLDivElemen
       )}
     </div>
   );
-};
+}

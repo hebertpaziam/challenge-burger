@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const roboto = Roboto({ weight: ['300', '400', '500', '700'], subsets: ['latin'] });
 
-export default async ({ children }: Readonly<{ children: React.ReactNode }>) => {
+export default async function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const data = await RequestConfig();
 
   const style: any = {
@@ -45,4 +45,4 @@ export default async ({ children }: Readonly<{ children: React.ReactNode }>) => 
       </body>
     </html>
   );
-};
+}

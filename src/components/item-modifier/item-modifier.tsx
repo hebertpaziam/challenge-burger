@@ -13,7 +13,11 @@ export type ItemModifierProps = Readonly<{
   onChange: (options: ICatalogItemModifierOption[]) => void;
 }>;
 
-export default ({ className, modifier, onChange }: ItemModifierProps & HTMLAttributes<HTMLDivElement>) => {
+export default function ItemModifier({
+  className,
+  modifier,
+  onChange,
+}: ItemModifierProps & HTMLAttributes<HTMLDivElement>) {
   const { locale, ccy } = useContext(ConfigContext);
   const [selectedOptions, setSelectedOptions] = useState<ICatalogItemModifierOption[]>([]);
 
@@ -28,7 +32,7 @@ export default ({ className, modifier, onChange }: ItemModifierProps & HTMLAttri
 
   useEffect(() => {
     onChange(selectedOptions);
-  }, [selectedOptions]);
+  }, [onChange, selectedOptions]);
 
   return (
     <div className={`item-modifier ${className || ''}`}>
@@ -41,7 +45,7 @@ export default ({ className, modifier, onChange }: ItemModifierProps & HTMLAttri
         </p>
       </div>
       <ul className="item-modifier__options">
-        {modifier.items?.map((option, index) => (
+        {modifier.items?.map((option) => (
           <li key={option.id} className="item-modifier__option">
             <label className="item-modifier__option-label" htmlFor={`option-${option.id}`}>
               <p className="item-modifier__option-name">{option.name}</p>
@@ -63,4 +67,4 @@ export default ({ className, modifier, onChange }: ItemModifierProps & HTMLAttri
       </ul>
     </div>
   );
-};
+}

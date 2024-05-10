@@ -2,26 +2,26 @@
 
 import './field.scss';
 
-import React, { HTMLAttributes } from 'react';
+import React, { ChangeEvent, HTMLAttributes } from 'react';
 
 import { Icon } from '@/components/icon';
 
 export type FieldProps = Readonly<{
-  onChange: Function;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type: 'text';
   value: any;
   prefixIcon?: string;
   placeholder?: string;
 }>;
 
-export default ({
+export default function Field({
   className,
   placeholder,
   prefixIcon,
   type = 'text',
   value,
   onChange,
-}: FieldProps & HTMLAttributes<HTMLDivElement>) => {
+}: FieldProps & HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={`field ${className || ''}`}>
       {prefixIcon && <Icon className="field__icon-prefix" name={prefixIcon} />}
@@ -35,4 +35,4 @@ export default ({
       />
     </div>
   );
-};
+}

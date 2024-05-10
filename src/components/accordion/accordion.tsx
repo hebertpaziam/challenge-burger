@@ -11,7 +11,12 @@ export type AccordionProps = Readonly<{
   startsOpen: boolean;
 }>;
 
-export default ({ name, className, children, startsOpen }: AccordionProps & HTMLAttributes<HTMLDivElement>) => {
+export default function Accordion({
+  name,
+  className,
+  children,
+  startsOpen,
+}: AccordionProps & HTMLAttributes<HTMLDivElement>) {
   const [isOpen, setIsOpen] = useState(startsOpen);
 
   const toggleAccordion = () => {
@@ -27,4 +32,4 @@ export default ({ name, className, children, startsOpen }: AccordionProps & HTML
       <div className="accordion__content">{children}</div>
     </div>
   );
-};
+}

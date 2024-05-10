@@ -8,9 +8,7 @@ import React, { useState } from 'react';
 
 import { Icon } from '@/components/icon';
 
-export type NavbarProps = Readonly<{}>;
-
-export default ({}: NavbarProps) => {
+export default function Navbar() {
   const pathname = usePathname();
   const [isOpened, setIsOpened] = useState(false);
 
@@ -44,4 +42,4 @@ export default ({}: NavbarProps) => {
       </button>
     </nav>
   );
-};
+}

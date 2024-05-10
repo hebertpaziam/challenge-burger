@@ -1,13 +1,13 @@
 'use client';
 
-import React, { HTMLAttributes, useEffect } from 'react';
+import React, { HTMLAttributes, useEffect, useState } from 'react';
 
 export type IconProps = Readonly<{
   name: string;
 }>;
 
-export default ({ name, className }: IconProps & HTMLAttributes<HTMLDivElement>) => {
-  const [href, setHref] = React.useState('');
+export default function Icon({ name, className }: IconProps & HTMLAttributes<HTMLDivElement>) {
+  const [href, setHref] = useState('');
 
   useEffect(() => {
     setHref(`/feather-sprite.svg#${name}`);
@@ -15,8 +15,8 @@ export default ({ name, className }: IconProps & HTMLAttributes<HTMLDivElement>)
 
   return (
     <svg
-      width='1em'
-      height='1em'
+      width="1em"
+      height="1em"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -27,4 +27,4 @@ export default ({ name, className }: IconProps & HTMLAttributes<HTMLDivElement>)
       <use href={href} />
     </svg>
   );
-};
+}

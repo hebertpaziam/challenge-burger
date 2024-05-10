@@ -10,7 +10,7 @@ import { ICatalogItem } from '@/interfaces/catalog-item';
 
 export type ItemDetailsProps = Readonly<{ item: ICatalogItem; count: number }>;
 
-export default ({ className, item, count }: ItemDetailsProps & HTMLAttributes<HTMLDivElement>) => {
+export default function ItemDetails({ className, item, count }: ItemDetailsProps & HTMLAttributes<HTMLDivElement>) {
   const { locale, ccy } = useContext(ConfigContext);
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -55,4 +55,4 @@ export default ({ className, item, count }: ItemDetailsProps & HTMLAttributes<HT
       <ItemModal item={item} isOpened={isModalOpened} onClose={closeModal} />
     </div>
   );
-};
+}

@@ -2,7 +2,7 @@
 
 import './basket.scss';
 
-import React, { HTMLAttributes, useContext, useEffect, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useContext, useEffect, useState } from 'react';
 
 import { Icon } from '@/components/icon';
 import { BasketContext } from '@/contexts/basket';
@@ -18,21 +18,24 @@ export type BasketProps = Readonly<{
   onClose: (event?: any) => void;
 }>;
 
-export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<HTMLDivElement>) => {
+export default function Basket({ isOpened, onClose, className }: BasketProps & HTMLAttributes<HTMLDivElement>) {
   const [total, setTotal] = useState(0);
   const { locale, ccy } = useContext(ConfigContext);
   const { basketItems, updateBasketQuantityItem } = useContext(BasketContext);
 
-  const getModifiersAmount = (modifiers: ICatalogItemModifier[] = []): number => {
+  const getModifiersAmount = useCallback((modifiers: ICatalogItemModifier[] = []): number => {
     return modifiers.reduce(
       (total, modifier) => total + modifier.items.reduce((total, option) => total + option.price, 0),
       0,
     );
-  };
+  }, []);
 
-  const getItemSubTotal = (item: IBasketItem): number => {
-    return (item.price + getModifiersAmount(item.modifiers)) * item.quantity;
-  };
+  const getItemSubTotal = useCallback(
+    (item: IBasketItem): number => {
+      return (item.price + getModifiersAmount(item.modifiers)) * item.quantity;
+    },
+    [getModifiersAmount],
+  );
 
   useEffect(() => {
     const handleKeyDown = (event: any) => event?.keyCode === 27 && onClose();
@@ -46,7 +49,7 @@ export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<H
     if (basketItems?.length) {
       setTotal(basketItems.reduce((total, item) => total + getItemSubTotal(item), 0));
     }
-  }, [basketItems]);
+  }, [basketItems, setTotal, getItemSubTotal]);
 
   return (
     <div className={`basket ${isOpened ? 'basket--open' : ''} ${className || ''}`}>
@@ -104,4 +107,4 @@ export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<H
       </div>
     </div>
   );
-};
+}

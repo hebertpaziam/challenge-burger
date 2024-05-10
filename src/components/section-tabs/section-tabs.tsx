@@ -12,16 +12,19 @@ export type SectionTabsProps = Readonly<{
   onSectionChange: (sectionId: number) => void;
 }>;
 
-export default ({
+export default function SectionTabs({
   className,
   sections,
   sectionActivated,
   onSectionChange,
-}: SectionTabsProps & HTMLAttributes<HTMLDivElement>) => {
+}: SectionTabsProps & HTMLAttributes<HTMLDivElement>) {
   return (
     <ol className={`section-tabs ${className || ''}`}>
       {sections?.map((section) => (
-        <li key={section.id} className={`section-tabs__item ${sectionActivated === section.id ? 'section-tabs__item--active' : ''}`}>
+        <li
+          key={section.id}
+          className={`section-tabs__item ${sectionActivated === section.id ? 'section-tabs__item--active' : ''}`}
+        >
           <a
             className="section-tabs__item-link"
             onClick={() => onSectionChange(sectionActivated !== section.id ? section.id : 0)}
@@ -33,4 +36,4 @@ export default ({
       ))}
     </ol>
   );
-};
+}

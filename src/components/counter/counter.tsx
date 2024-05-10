@@ -12,18 +12,18 @@ export type CounterProps = Readonly<{
   onChange: (value: number) => void;
 }>;
 
-export default ({
+export default function Counter({
   className,
   initialValue = 1,
   minValue = 1,
   maxValue = 100,
   onChange,
-}: CounterProps & HTMLAttributes<HTMLDivElement>) => {
+}: CounterProps & HTMLAttributes<HTMLDivElement>) {
   const [value, setValue] = useState(initialValue || minValue);
 
   useEffect(() => {
     onChange(value);
-  }, [value]);
+  }, [onChange, value]);
 
   return (
     <div className={`counter ${className || ''}`}>
@@ -48,4 +48,4 @@ export default ({
       </button>
     </div>
   );
-};
+}
