@@ -1,0 +1,67 @@
+@import 'toolbox';
+
+.item-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__image {
+    width: 128px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  &__counter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1em;
+    color: $system-background-color;
+    background-color: $system-primary-color;
+    border-radius: 4px;
+
+    &[data-count='0'] {
+      display: none;
+    }
+    &::after {
+      content: attr(data-count);
+    }
+  }
+  
+  &__title,
+  &__price {
+    font-size: 1rem;
+    line-height: 1.1719rem;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+  &__price {
+    color: $color-gray-500;
+  }
+  &__description {
+    font-size: 1rem;
+    line-height: 1.1719rem;
+    font-weight: 300;
+    max-width: 424px;
+
+    overflow: hidden; // Hide the overflowing content
+    text-overflow: ellipsis; // Display ellipsis (...) for overflowing text
+    line-clamp: 2; // Limit the text to 2 lines
+    -webkit-line-clamp: 2; // Limit the text to 2 lines (for Safari)
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+}

@@ -1,0 +1,33 @@
+@import 'toolbox';
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 150px;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 0;
+    cursor: pointer;
+    color: $system-background-color;
+    background-color: $system-primary-color;
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $color-gray-500;
+      background-color: $color-gray-300;
+    }
+  }
+
+  &__value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.79rem;
+  }
+}

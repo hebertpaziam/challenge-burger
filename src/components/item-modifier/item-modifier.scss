@@ -1,0 +1,67 @@
+@import 'toolbox';
+
+.item-modifier {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    color: $color-gray-500;
+    background-color: $color-gray-100;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.1719rem;
+    letter-spacing: 0.5px;
+    color: $color-gray-500;
+  }
+
+  &__description {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.1719rem;
+    letter-spacing: 0.5px;
+  }
+
+  &__options {
+    padding: 1rem 1.5rem;
+    background-color: $color-white;
+  }
+
+  &__option {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+
+    &-name {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.1719rem;
+    }
+
+    &-price {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.1719rem;
+    }
+
+    &-label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    &-input {
+      width: 1.3rem;
+      accent-color: $system-primary-color;
+    }
+  }
+
+  &__footer {
+    
+  }
+}

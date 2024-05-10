@@ -1,0 +1,51 @@
+@import 'toolbox';
+
+.section-tabs {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  overflow-x: auto;
+
+  &__item {
+    padding: 0 12px;
+    border-bottom: 2px solid transparent;
+    transition: $default-transition;
+  }
+
+  &__item-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  &__image {
+    width: 82px;
+    height: 82px;
+    padding: 2px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    object-fit: cover;
+    transition: $default-transition;
+  }
+
+  &__title {
+    font-size: 1rem;
+    line-height: 1.1719rem;
+    letter-spacing: 0.5px;
+    transition: $default-transition;
+    padding-bottom: 1rem;
+  }
+
+  &__item--active {
+    border-color: $system-primary-color;
+
+    .section-tabs__title {
+      font-weight: 600;
+    }
+    .section-tabs__title {
+      border-color: $system-primary-color;
+    }
+  }
+}

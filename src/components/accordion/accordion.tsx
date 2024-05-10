@@ -4,7 +4,7 @@ import './accordion.scss';
 
 import React, { HTMLAttributes, useState } from 'react';
 
-import Icon from '../icon/icon';
+import { Icon } from '@/components/icon';
 
 export type AccordionProps = Readonly<{
   name: string;
@@ -22,7 +22,7 @@ export default ({ name, className, children, startsOpen }: AccordionProps & HTML
     <div className={`accordion ${className || ''} ${isOpen ? 'accordion--open' : ''}`}>
       <button type="button" className="accordion__header" onClick={toggleAccordion}>
         <p className="accordion__title">{name}</p>
-        <Icon className='accordion__icon' name="chevron-down" />
+        <Icon className="accordion__icon" name="chevron-down" />
       </button>
       <div className="accordion__content">{children}</div>
     </div>

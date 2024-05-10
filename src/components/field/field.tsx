@@ -4,7 +4,7 @@ import './field.scss';
 
 import React, { HTMLAttributes } from 'react';
 
-import Icon from '../icon/icon';
+import { Icon } from '@/components/icon';
 
 export type FieldProps = Readonly<{
   onChange: Function;
