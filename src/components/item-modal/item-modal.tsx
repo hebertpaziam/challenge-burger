@@ -47,7 +47,7 @@ export default function ItemModal({
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose]);
+  }, []);
 
   useEffect(() => {
     const amountModifiers = selectedModifiers.reduce((total, current) => total + current.price, 0);
@@ -56,7 +56,7 @@ export default function ItemModal({
     } else {
       setTotalAmount(counterValue * amountModifiers);
     }
-  }, [counterValue, selectedModifiers, item.price, setTotalAmount]);
+  }, [counterValue, selectedModifiers, item.price]);
 
   return (
     <div className={`item-modal ${isOpened ? 'item-modal--open' : ''} ${className || ''}`}>

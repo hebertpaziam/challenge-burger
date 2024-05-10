@@ -2,7 +2,7 @@
 
 import './basket.scss';
 
-import React, { HTMLAttributes, useCallback, useContext, useEffect, useState } from 'react';
+import React, { HTMLAttributes, useContext, useEffect, useState } from 'react';
 
 import { Icon } from '@/components/icon';
 import { BasketContext } from '@/contexts/basket';
@@ -23,19 +23,16 @@ export default function Basket({ isOpened, onClose, className }: BasketProps & H
   const { locale, ccy } = useContext(ConfigContext);
   const { basketItems, updateBasketQuantityItem } = useContext(BasketContext);
 
-  const getModifiersAmount = useCallback((modifiers: ICatalogItemModifier[] = []): number => {
+  const getModifiersAmount = (modifiers: ICatalogItemModifier[] = []): number => {
     return modifiers.reduce(
       (total, modifier) => total + modifier.items.reduce((total, option) => total + option.price, 0),
       0,
     );
-  }, []);
+  };
 
-  const getItemSubTotal = useCallback(
-    (item: IBasketItem): number => {
-      return (item.price + getModifiersAmount(item.modifiers)) * item.quantity;
-    },
-    [getModifiersAmount],
-  );
+  const getItemSubTotal = (item: IBasketItem): number => {
+    return (item.price + getModifiersAmount(item.modifiers)) * item.quantity;
+  };
 
   useEffect(() => {
     const handleKeyDown = (event: any) => event?.keyCode === 27 && onClose();
@@ -43,13 +40,13 @@ export default function Basket({ isOpened, onClose, className }: BasketProps & H
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose]);
+  }, []);
 
   useEffect(() => {
     if (basketItems?.length) {
       setTotal(basketItems.reduce((total, item) => total + getItemSubTotal(item), 0));
     }
-  }, [basketItems, setTotal, getItemSubTotal]);
+  }, [basketItems]);
 
   return (
     <div className={`basket ${isOpened ? 'basket--open' : ''} ${className || ''}`}>

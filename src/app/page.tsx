@@ -1,7 +1,7 @@
 'use client';
 import './page.scss';
 
-import React, { ChangeEvent, useCallback, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 
 import { Banner } from '@/components/banner';
 import { Basket } from '@/components/basket';
@@ -23,7 +23,7 @@ export default function Home() {
     setSearchTerm(e.target.value);
   };
 
-  const processSearch = useCallback(() => {
+  const processSearch = () => {
     let filtered: ICatalogSection[] = [...catalog.sections.map((section) => ({ ...section, items: [] }))];
 
     catalog.sections.forEach((section) => {
@@ -42,11 +42,11 @@ export default function Home() {
     });
 
     setFilteredCatalog({ ...filteredCatalog, sections: [...filtered.filter((section) => !!section.items.length)] });
-  }, [catalog, searchTerm, filteredCatalog, setFilteredCatalog]);
+  };
 
   useEffect(() => {
     fetchCatalog();
-  }, [fetchCatalog]);
+  }, []);
 
   useEffect(() => {
     setFilteredCatalog({ ...catalog });
@@ -62,7 +62,7 @@ export default function Home() {
       const newTimeoutId = setTimeout(() => processSearch(), 500);
       setTimeoutId(newTimeoutId);
     }
-  }, [searchTerm, catalog, timeoutId, processSearch]);
+  }, [searchTerm]);
 
   return (
     <div className="home">

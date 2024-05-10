@@ -2,7 +2,7 @@
 
 import './item-modifier.scss';
 
-import React, { HTMLAttributes, useContext, useEffect, useState } from 'react';
+import React, { HTMLAttributes, useCallback, useContext, useEffect, useState } from 'react';
 
 import { ConfigContext } from '@/contexts/config';
 import { ICatalogItemModifier } from '@/interfaces/catalog-item-modifier';
@@ -23,16 +23,17 @@ export default function ItemModifier({
 
   const isMultiple = modifier.minChoices !== modifier.maxChoices;
 
-  const handleSelect = (option: ICatalogItemModifierOption) => {
-    setTimeout(() => {
+  const handleSelect = useCallback(
+    (option: ICatalogItemModifierOption) => {
       const newSelectedOptions = isMultiple ? [...new Set([...selectedOptions, option])] : [option];
       setSelectedOptions(newSelectedOptions);
-    }, 0);
-  };
+    },
+    [selectedOptions, isMultiple],
+  );
 
   useEffect(() => {
     onChange(selectedOptions);
-  }, [onChange, selectedOptions]);
+  }, [selectedOptions]);
 
   return (
     <div className={`item-modifier ${className || ''}`}>

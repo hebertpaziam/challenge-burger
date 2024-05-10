@@ -23,7 +23,7 @@ export default function Counter({
 
   useEffect(() => {
     onChange(value);
-  }, [onChange, value]);
+  }, [value]);
 
   return (
     <div className={`counter ${className || ''}`}>
