@@ -30,6 +30,10 @@ export default function Basket({ className }: HTMLAttributes<HTMLDivElement>) {
     return (item.price + getModifiersAmount(item.modifiers)) * item.quantity;
   };
 
+  const redirectToCheckout = () => {
+    location.href = 'https://www.linkedin.com/in/hebertpaziam/';
+  };
+
   useEffect(() => {
     const handleKeyDown = (event: any) => event?.keyCode === 27 && setIsBasketOpened(false);
     document.addEventListener('keydown', handleKeyDown);
@@ -95,7 +99,7 @@ export default function Basket({ className }: HTMLAttributes<HTMLDivElement>) {
               <span>Total</span>
               <strong>{new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(total)}</strong>
             </p>
-            <ActionButton className="basket__checkout">Checkout now</ActionButton>
+            <ActionButton className="basket__checkout" onClick={redirectToCheckout}>Checkout now</ActionButton>
           </>
         )}
       </div>
