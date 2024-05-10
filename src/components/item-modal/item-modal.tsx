@@ -36,11 +36,13 @@ export default ({ className, item, isOpened, onClose }: ItemModalProps & HTMLAtt
   }, [counterValue, modifiersAmount]);
 
   return (
-    <div className={`item-modal ${isOpened ? 'item-modal--open' : ''} ${className || ''}`}>
+    <div
+      className={`item-modal ${isOpened ? 'item-modal--open' : ''} ${className || ''}`}
+    >
       <div className="item-modal__backdrop" onClick={onClose}></div>
       <div className="item-modal__content">
         <div className="item-modal__header">
-          <img src={item.images?.[0].image} alt="" />
+          {item.images?.[0].image && <img src={item.images?.[0].image} alt="" />}
           <button type="button" className="item-modal__close" onClick={onClose}>
             <Icon name="x" />
           </button>

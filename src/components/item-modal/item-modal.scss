@@ -1,7 +1,5 @@
 @import 'toolbox';
 
-
-
 .item-modal {
   display: none;
   align-items: center;
@@ -11,13 +9,22 @@
   overflow: auto;
   z-index: 1;
 
+  &,
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
   &__backdrop {
     z-index: -1;
     background-color: $color-gray-700;
     opacity: 0.65;
   }
 
-  &__content{
+  &__content {
     width: 100%;
     height: auto;
     max-width: 480px;
@@ -32,14 +39,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 4rem;
     max-height: 265px;
     overflow: hidden;
   }
 
   &__close {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 18px;
+    right: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,7 +94,7 @@
     justify-content: center;
     flex-direction: column;
     background-color: $color-white;
-    gap: 0.5rem;
+    gap: 1rem;
     padding: 1rem 1.5rem;
   }
 
@@ -94,14 +102,4 @@
     display: flex;
   }
 
-  @include respond-to('desktop') {
-    &,
-    &__backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-    }
-  }
 }
