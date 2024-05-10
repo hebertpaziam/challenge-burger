@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, Dispatch, ReactNode, useState } from 'react';
+import React, { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react';
 
 import { RequestCatalog } from '@/api/catalog';
 import { ICatalog } from '@/interfaces/catalog';

@@ -1,7 +1,7 @@
 import '../styles/styles.scss';
 
 import { Roboto } from 'next/font/google';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { RequestConfig } from '@/api/config';
 import { Navbar } from '@/components/navbar';
