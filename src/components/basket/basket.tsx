@@ -57,16 +57,9 @@ export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<H
               </p>
               {item?.modifiers?.length && (
                 <p className="basket__item-subtitle">
-                  Com &nbsp;
-                  <span>{item.modifiers!.map((m) => `${m.items.length} ${m.name}`).join(', ')}</span>
-                  &nbsp;
-                  <span>
-                    (+
-                    {new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(
-                      getModifiersAmount(item.modifiers!),
-                    )}
-                    )
-                  </span>
+                  {`With ${item.modifiers![0].items[0].name} ` +
+                    `(+${new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(getModifiersAmount(item.modifiers!))})`}
+                  <span></span>
                 </p>
               )}
               <Counter
@@ -85,7 +78,7 @@ export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<H
       <div className="basket__footer">
         <p className="basket__subtotal"></p>
         <p className="basket__total"></p>
-        <ActionButton className='basket__checkout'>Checkout now</ActionButton>
+        {!!basketItems.length && <ActionButton className="basket__checkout">Checkout now</ActionButton>}
       </div>
     </div>
   );

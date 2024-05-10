@@ -6,36 +6,28 @@ import React, { HTMLAttributes, useContext, useEffect, useState } from 'react';
 
 import { ConfigContext } from '@/contexts/config';
 import { ICatalogItemModifier } from '@/interfaces/catalog-item-modifier';
+import { ICatalogItemModifierOption } from '@/interfaces/catalog-item-modifier-option';
 
 export type ItemModifierProps = Readonly<{
   modifier: ICatalogItemModifier;
-  onChange: (value: number) => void;
+  onChange: (options: ICatalogItemModifierOption[]) => void;
 }>;
 
-export default ({
-  className,
-  modifier,
-  onChange,
-}: ItemModifierProps & HTMLAttributes<HTMLDivElement>) => {
+export default ({ className, modifier, onChange }: ItemModifierProps & HTMLAttributes<HTMLDivElement>) => {
   const { locale, ccy } = useContext(ConfigContext);
-  const [selectedOptions, setSelectedOptions] = useState<number[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<ICatalogItemModifierOption[]>([]);
 
   const isMultiple = modifier.minChoices !== modifier.maxChoices;
 
-  const handleSelect = (optionId: number) => {
+  const handleSelect = (option: ICatalogItemModifierOption) => {
     setTimeout(() => {
-      const newSelectedOptions = isMultiple ? [...new Set<number>([...selectedOptions, optionId])] : [optionId];
+      const newSelectedOptions = isMultiple ? [...new Set([...selectedOptions, option])] : [option];
       setSelectedOptions(newSelectedOptions);
     }, 0);
   };
 
   useEffect(() => {
-    const amount = modifier.items.reduce(
-      (acc, item) => acc + (selectedOptions.includes(item.id) ? item.price || 0 : 0),
-      0,
-    );
-
-    onChange(amount);
+    onChange(selectedOptions);
   }, [selectedOptions]);
 
   return (
@@ -63,8 +55,8 @@ export default ({
               value={option.id}
               name={`modifier-${modifier.id}`}
               id={`option-${option.id}`}
-              checked={selectedOptions.includes(option.id)}
-              onChange={() => handleSelect(option.id)}
+              checked={!!selectedOptions.find(({ id }) => id === option.id)}
+              onChange={() => handleSelect(option)}
             />
           </li>
         ))}
