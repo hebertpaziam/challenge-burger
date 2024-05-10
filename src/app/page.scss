@@ -38,13 +38,16 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
+      gap: 1.5rem;
       padding: 40px 32px;
       background-color: $color-gray-100;
+     
 
-      &-items {
+      &-content {
         flex: 1;
       }
     }
+    
     &__basket{
       width: 320px;
     }

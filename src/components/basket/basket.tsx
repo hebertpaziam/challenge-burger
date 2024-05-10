@@ -76,9 +76,18 @@ export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<H
       )}
 
       <div className="basket__footer">
-        <p className="basket__subtotal"></p>
-        <p className="basket__total"></p>
-        {!!basketItems.length && <ActionButton className="basket__checkout">Checkout now</ActionButton>}
+        {!!basketItems.length && (
+          <>
+            <p className="basket__subtotal">
+              <span>Sub total</span> <strong>R$22.50</strong>
+            </p>
+            <hr />
+            <p className="basket__total">
+              <span>Total</span> <strong>R$22.50</strong>
+            </p>
+            <ActionButton className="basket__checkout">Checkout now</ActionButton>
+          </>
+        )}
       </div>
     </div>
   );
