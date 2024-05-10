@@ -31,7 +31,7 @@ export default function Basket({ className }: HTMLAttributes<HTMLDivElement>) {
   };
 
   const redirectToCheckout = () => {
-    location.href = 'https://www.linkedin.com/in/hebertpaziam/';
+    location.href = 'https://www.youtube.com/embed/hPr-Yc92qaY?autoplay=1&controls=0&rel=0&loop=1&showinfo=0';
   };
 
   useEffect(() => {
