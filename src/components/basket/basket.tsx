@@ -84,7 +84,7 @@ export default function Basket({ className }: HTMLAttributes<HTMLDivElement>) {
         )}
       </div>
       <div className="basket__footer">
-        {!!basketItems.length && (
+        {!!basketItems?.length && (
           <>
             <p className="basket__subtotal">
               <span>Sub total</span>
@@ -101,7 +101,7 @@ export default function Basket({ className }: HTMLAttributes<HTMLDivElement>) {
       </div>
       <div className={`basket__mobile-actions ${!basketItems?.length ? 'basket__mobile-actions--hidden' : ''}`}>
         <ActionButton className="basket__show" onClick={() => setIsBasketOpened(true)}>
-          Your basket • {basketItems.length} item(s)
+          Your basket • {basketItems?.length} item(s)
         </ActionButton>
       </div>
     </div>

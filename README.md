@@ -20,6 +20,8 @@ npm run build
 npm run dev
 ```
 
+it will be able in [localhost:3000](http://localhost:3000)
+
 ## Development Requirements
 
 - React ✅
