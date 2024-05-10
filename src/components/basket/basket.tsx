@@ -2,11 +2,12 @@
 
 import './basket.scss';
 
-import React, { HTMLAttributes, useContext, useEffect } from 'react';
+import React, { HTMLAttributes, useContext, useEffect, useState } from 'react';
 
 import { Icon } from '@/components/icon';
 import { BasketContext } from '@/contexts/basket';
 import { ConfigContext } from '@/contexts/config';
+import { IBasketItem } from '@/interfaces/basket-item';
 import { ICatalogItemModifier } from '@/interfaces/catalog-item-modifier';
 
 import ActionButton from '../action-button/action-button';
@@ -18,14 +19,20 @@ export type BasketProps = Readonly<{
 }>;
 
 export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<HTMLDivElement>) => {
+  const [total, setTotal] = useState(0);
   const { locale, ccy } = useContext(ConfigContext);
   const { basketItems, updateBasketQuantityItem } = useContext(BasketContext);
 
-  const getModifiersAmount = (modifiers?: ICatalogItemModifier[]): number =>
-    modifiers?.reduce(
+  const getModifiersAmount = (modifiers: ICatalogItemModifier[] = []): number => {
+    return modifiers.reduce(
       (total, modifier) => total + modifier.items.reduce((total, option) => total + option.price, 0),
       0,
-    ) || 0;
+    );
+  };
+
+  const getItemSubTotal = (item: IBasketItem): number => {
+    return (item.price + getModifiersAmount(item.modifiers)) * item.quantity;
+  };
 
   useEffect(() => {
     const handleKeyDown = (event: any) => event?.keyCode === 27 && onClose();
@@ -34,6 +41,12 @@ export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<H
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
+
+  useEffect(() => {
+    if (basketItems?.length) {
+      setTotal(basketItems.reduce((total, item) => total + getItemSubTotal(item), 0));
+    }
+  }, [basketItems]);
 
   return (
     <div className={`basket ${isOpened ? 'basket--open' : ''} ${className || ''}`}>
@@ -50,9 +63,7 @@ export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<H
               <p className="basket__item-title">
                 {item.name}{' '}
                 <strong>
-                  {new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(
-                    (item.price + getModifiersAmount(item.modifiers)) * item.quantity,
-                  )}
+                  {new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(getItemSubTotal(item))}
                 </strong>
               </p>
               {item?.modifiers?.length && (
@@ -79,11 +90,13 @@ export default ({ isOpened, onClose, className }: BasketProps & HTMLAttributes<H
         {!!basketItems.length && (
           <>
             <p className="basket__subtotal">
-              <span>Sub total</span> <strong>R$22.50</strong>
+              <span>Sub total</span>
+              <strong>{new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(total)}</strong>
             </p>
             <hr />
             <p className="basket__total">
-              <span>Total</span> <strong>R$22.50</strong>
+              <span>Total</span>
+              <strong>{new Intl.NumberFormat(locale, { style: 'currency', currency: ccy }).format(total)}</strong>
             </p>
             <ActionButton className="basket__checkout">Checkout now</ActionButton>
           </>

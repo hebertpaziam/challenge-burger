@@ -20,7 +20,7 @@ export default ({
 }: SectionTabsProps & HTMLAttributes<HTMLDivElement>) => {
   return (
     <ol className={`section-tabs ${className || ''}`}>
-      {sections.map((section) => (
+      {sections?.map((section) => (
         <li key={section.id} className={`section-tabs__item ${sectionActivated === section.id ? 'section-tabs__item--active' : ''}`}>
           <a
             className="section-tabs__item-link"
