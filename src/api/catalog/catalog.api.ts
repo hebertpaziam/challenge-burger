@@ -7,6 +7,6 @@ export const RequestCatalog = async (): Promise<ICatalog> => {
     const response = await fetch(MENU_URL);
     return await response.json();
   } catch (error) {
-    throw new Error('Failed to fetch data');
+    return Promise.reject(error);
   }
 };

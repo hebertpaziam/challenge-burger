@@ -1,1 +1,1 @@
-export { RequestCatalog } from './catalog';
+export { RequestCatalog } from './catalog.api';
